@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Garm Alarm</title>
+  <meta name="description" content="AI-powered legit checker for Vinted, Depop &amp; eBay">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Garm Alarm">
+  <meta property="og:description" content="AI-powered legit checker for Vinted, Depop &amp; eBay">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F7F5F2;
+      --ink: #1A1A1A;
+      --muted: #6B6B6B;
+      --rule: #D8D4CE;
+      --red: #C8102E;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --mono: 'Courier New', Courier, monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── WORDMARK ── */
+    .wordmark {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 28px 0 0;
+      display: block;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero__headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 14vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero__headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .hero__sub {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 360px;
+      margin-bottom: 36px;
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta-wrap {
+      position: sticky;
+      bottom: 0;
+      background: var(--bg);
+      padding: 16px 0 20px;
+      z-index: 10;
+    }
+
+    /* Not sticky in hero — only at bottom of page */
+    .hero .cta-wrap {
+      position: static;
+      padding: 0;
+      background: transparent;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      padding: 18px 24px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.88;
+    }
+
+    /* ── PROBLEM ── */
+    .problem {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--rule);
+      text-align: center;
+    }
+
+    .problem__statement {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 6vw, 1.9rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      list-style: none;
+    }
+
+    .step {
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .step:last-child {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .step__num {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .step__title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .step__desc {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── BRANDS ── */
+    .brands {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brands__list {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 2.2;
+    }
+
+    .brands__sep {
+      color: var(--red);
+      margin: 0 6px;
+      font-weight: 300;
+    }
+
+    /* ── VERDICT CARD ── */
+    .verdict-section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .verdict-card {
+      border: 1px solid var(--ink);
+    }
+
+    .verdict-card__header {
+      background: var(--red);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .verdict-card__badge {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .verdict-card__conf {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .verdict-card__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .verdict-col {
+      padding: 20px 16px;
+    }
+
+    .verdict-col:first-child {
+      border-right: 1px solid var(--rule);
+    }
+
+    .verdict-col__label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .verdict-col__items {
+      list-style: none;
+    }
+
+    .verdict-col__items li {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink);
+      line-height: 1.7;
+      padding: 2px 0;
+    }
+
+    .verdict-col__items li::before {
+      color: var(--red);
+      margin-right: 6px;
+      font-weight: 700;
+    }
+
+    .verdict-col--findings li::before {
+      content: "✗";
+    }
+
+    .verdict-col--photos li::before {
+      content: "→";
+    }
+
+    .verdict-card__meta {
+      padding: 12px 16px;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 0 100px;
+    }
+
+    .footer__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+
+    .footer__wordmark {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .footer__powered {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .footer__note {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 560px) {
+      .cta-wrap {
+        position: static;
+        padding: 0;
+        background: transparent;
+      }
+
+      .hero .cta-btn {
+        width: auto;
+        display: inline-block;
+        padding: 18px 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <span class="wordmark">The Garm Alarm</span>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <h1 class="hero__headline">
+        Don't get<br><em>fooled.</em>
+      </h1>
+      <p class="hero__sub">
+        AI-powered legit checks for Vinted, Depop &amp; eBay.
+        Spot DHGate fakes before you buy.
+      </p>
+      <div class="hero .cta-wrap">
+        <a href="https://huggingface.co/spaces/Hamapp/The-Garm-Alarm" class="cta-btn">
+          Check a listing &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- ── PROBLEM ── -->
+    <section class="problem">
+      <p class="problem__statement">
+        DHGate fakes have flooded the secondhand market.
+        Most buyers can't tell.
+      </p>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="how">
+      <p class="section-label">How it works</p>
+      <ol class="steps">
+        <li class="step">
+          <p class="step__num">01</p>
+          <p class="step__title">Paste the listing URL</p>
+          <p class="step__desc">From Vinted, Depop, or eBay. We pull every photo automatically.</p>
+        </li>
+        <li class="step">
+          <p class="step__num">02</p>
+          <p class="step__title">We analyse every photo with AI</p>
+          <p class="step__desc">Claude Vision inspects stitching, labels, hardware, and brand-specific tells.</p>
+        </li>
+        <li class="step">
+          <p class="step__num">03</p>
+          <p class="step__title">Get a verdict</p>
+          <p class="step__desc">Authentic, Suspicious, or Fake — with specific findings and photos to request from the seller.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ── BRANDS ── -->
+    <section class="brands">
+      <p class="section-label">Brands we know</p>
+      <p class="brands__list">
+        Stone Island<span class="brands__sep">&middot;</span>CP
+        Company<span class="brands__sep">&middot;</span>Moncler<span
+        class="brands__sep">&middot;</span>Canada Goose<span
+        class="brands__sep">&middot;</span>Supreme<span
+        class="brands__sep">&middot;</span>Trapstar<span
+        class="brands__sep">&middot;</span>Corteiz<span
+        class="brands__sep">&middot;</span>Nike / Jordan<span
+        class="brands__sep">&middot;</span>Adidas / Yeezy<span
+        class="brands__sep">&middot;</span>Ralph Lauren<span
+        class="brands__sep">&middot;</span>The North Face<span
+        class="brands__sep">&middot;</span>Salomon<span
+        class="brands__sep">&middot;</span>UGG<span
+        class="brands__sep">&middot;</span>On Running<span
+        class="brands__sep">&middot;</span>Adanola<span
+        class="brands__sep">&middot;</span>New Balance
+      </p>
+    </section>
+
+    <!-- ── SAMPLE VERDICT ── -->
+    <section class="verdict-section">
+      <p class="section-label">What a verdict looks like</p>
+      <div class="verdict-card">
+        <div class="verdict-card__header">
+          <span class="verdict-card__badge">LIKELY FAKE</span>
+          <span class="verdict-card__conf">82% confidence</span>
+        </div>
+        <div class="verdict-card__body">
+          <div class="verdict-col verdict-col--findings">
+            <p class="verdict-col__label">What we found</p>
+            <ul class="verdict-col__items">
+              <li>Badge is flat printed, not embroidered</li>
+              <li>Font weight too bold on badge text</li>
+              <li>Zip pull unbranded generic</li>
+              <li>Price 69% below market</li>
+            </ul>
+          </div>
+          <div class="verdict-col verdict-col--photos">
+            <p class="verdict-col__label">Ask the seller for</p>
+            <ul class="verdict-col__items">
+              <li>Badge close-up, front</li>
+              <li>Badge reverse stitching</li>
+              <li>Full interior label</li>
+              <li>Zip pull close-up</li>
+            </ul>
+          </div>
+        </div>
+        <div class="verdict-card__meta">
+          <span>Stone Island jacket &middot; Vinted</span>
+          <span>Asking: &pound;28</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="footer__row">
+        <span class="footer__wordmark">The Garm Alarm</span>
+        <span class="footer__powered">Powered by Claude AI</span>
+      </div>
+      <p class="footer__note">Free to use. No account needed.</p>
+    </footer>
+
+  </div><!-- /container -->
+
+  <!-- Sticky CTA (mobile only, always visible) -->
+  <div class="cta-wrap">
+    <div class="container">
+      <a href="https://huggingface.co/spaces/Hamapp/The-Garm-Alarm" class="cta-btn">
+        Check a listing &rarr;
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

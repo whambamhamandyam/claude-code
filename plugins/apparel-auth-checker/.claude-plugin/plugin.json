@@ -1,0 +1,15 @@
+{
+  "name": "apparel-auth-checker",
+  "version": "1.0.0",
+  "description": "AI-powered legit check for apparel on Vinted, Depop, and eBay. Paste a listing URL or image paths and get an instant authenticity verdict powered by Claude Vision.",
+  "author": {
+    "name": "Claude Code"
+  },
+  "commands": [
+    {
+      "name": "legit-check",
+      "description": "Run an AI-powered authenticity check on an apparel listing",
+      "path": "commands/legit-check.md"
+    }
+  ]
+}
